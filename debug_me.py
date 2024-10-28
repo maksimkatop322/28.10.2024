@@ -1,6 +1,7 @@
 # Inicializē mainīgos
 inventory = []
 player_alive = True
+got_knife = False
 
 
 # Definē funkciju, kas sāk spēli un vada ciklu, kamēr spēlētājs ir dzīvs
@@ -37,17 +38,22 @@ def foyer():
 
 
 def kitchen():
-    print("Tu esi virtuvē. Tā ir biedējoša, un tu atrod rūsinātu nazi. Vai tu to 'ņem' vai atstāj 'aizvērtu'?")
-    choice = ""
-    while choice not in ["ņem", "aizvērtu"]:
-        choice = input(">>> ").lower()
-        if choice == "ņem":
-            inventory.append("nazis")
-            print("Tu paņēmi nazi.")
-        elif choice == "aizvērtu":
-            break
-        else:
-            print("Nepareiza izvēle. Mēģini vēlreiz.")
+    global got_knife
+    if not got_knife:
+        print("Tu esi virtuvē. Tā ir biedējoša, un tu atrod rūsinātu nazi. Vai tu to 'ņem' vai atstāj 'aizvērtu'?")
+        choice = ""
+        while choice not in ["ņem", "aizvērtu"]:
+            choice = input(">>> ").lower()
+            if choice == "ņem":
+                got_knife = True
+                inventory.append("nazis")
+                print("Tu paņēmi nazi.")
+            elif choice == "aizvērtu":
+                break
+            else:
+                print("Nepareiza izvēle. Mēģini vēlreiz.")
+    else:
+        print("Tu esi virtuvē")
     print("Pēkšņi parādās spoks! Vai tu vēlies 'cīnīties' vai 'bēgt'?")
     action = ""
     while action not in ["cīnīties", "bēgt"]:
